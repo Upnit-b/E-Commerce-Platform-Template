@@ -172,11 +172,9 @@
 
 
 <script>
-
   const redirect_url = '{% url "order_complete" %}';
 
   paypal.Buttons({
-
     createOrder: async function() {
       const response = await fetch('{% url 'create_order' %}',{
         method: "POST",
@@ -202,6 +200,7 @@
     },
 
     onApprove: async function(data,actions) {
+      //the data in function arguments comes from paypal and has orderID
       const response = await fetch('{% url "payments" %}',{
         method: "POST",
         headers: {
@@ -214,10 +213,11 @@
       });
 
       const transactionData = await response.json();
-      window.location.href = redirect_url + '?order_number=' + transactionData.order_number + '&payment_id=' + transactionData.payment_id;
+      if (transactionData.success) {
+        window.location.href = redirect_url + '?order_number=' + transactionData.order_number + '&payment_id=' + transactionData.payment_id;
+      }
     }
   }).render('#paypal-button-container');
 
 </script>
-
 {% endblock %}
