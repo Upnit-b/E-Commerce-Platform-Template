@@ -204,6 +204,8 @@ def payments(request):
             "status": status,
             "order_number": order_id,
         })
+    else:
+        return redirect("cart")
 
 
 def place_order(request):
