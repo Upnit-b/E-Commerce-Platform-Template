@@ -173,6 +173,8 @@ def payments(request):
             orderproduct.ordered = True
             orderproduct.save()
 
+            # product variations to be added in order product model after saving the object
+            # as it is many to many fields
             cart_item = CartItem.objects.get(pk=item.id)
             product_variation = cart_item.variations.all()
             orderproduct = OrderProduct.objects.get(pk=orderproduct.id)

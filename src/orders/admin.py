@@ -3,6 +3,8 @@ from django.contrib import admin
 from .models import Payment, Order, OrderProduct
 
 # Register your models here.
+
+# orderproductinline class is to append the orderproduct details with order model in admin
 class OrderProductInline(admin.TabularInline):
     model = OrderProduct
     readonly_fields = ("payment", "user", "product", "quantity",
