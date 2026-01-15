@@ -89,36 +89,36 @@
 
               <tbody>
                 {% for cart_item in cart_items %}
-                  <tr>
-                    <td>
-                      <figure class="itemside align-items-center">
-                        <div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
-                        <figcaption class="info">
-                          <a href="{{ cart_item.product.get_url }}" class="title text-dark">
-                            {{ cart_item.product.product_name }}</a>
-                          <p class="text-muted small">
-                            {% if cart_item.variations.all %}
-                              {% for item in cart_item.variations.all %}
-                                {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
-                              {% endfor %}
-                            {% endif %}
-                          </p>
-                        </figcaption>
-                      </figure>
-                    </td>
+                <tr>
+                  <td>
+                    <figure class="itemside align-items-center">
+                      <div class="aside"><img src="{{ cart_item.product.images.url }}" class="img-sm"></div>
+                      <figcaption class="info">
+                        <a href="{{ cart_item.product.get_url }}" class="title text-dark">
+                          {{ cart_item.product.product_name }}</a>
+                        <p class="text-muted small">
+                          {% if cart_item.variations.all %}
+                          {% for item in cart_item.variations.all %}
+                          {{ item.variation_category | capfirst }} : {{ item.variation_value | capfirst }} <br>
+                          {% endfor %}
+                          {% endif %}
+                        </p>
+                      </figcaption>
+                    </figure>
+                  </td>
 
-                    <td>
-                      <label for="">{{ cart_item.quantity }}</label>
-                    </td>
+                  <td>
+                    <label for="">{{ cart_item.quantity }}</label>
+                  </td>
 
-                    <td>
-                      <div class="price-wrap">
-                        <var class="price">${{ cart_item.sub_total }}</var>
-                        <small class="text-muted"> ${{ cart_item.product.price }} each </small>
-                      </div> <!-- price-wrap .// -->
-                    </td>
+                  <td>
+                    <div class="price-wrap">
+                      <var class="price">${{ cart_item.sub_total }}</var>
+                      <small class="text-muted"> ${{ cart_item.product.price }} each </small>
+                    </div> <!-- price-wrap .// -->
+                  </td>
 
-                  </tr>
+                </tr>
                 {% endfor %}
               </tbody>
             </table>
@@ -173,6 +173,7 @@
 
 <script>
   const redirect_url = '{% url "order_complete" %}';
+  const cancel_url = '{% url "order_cancel" %}';
 
   paypal.Buttons({
     createOrder: async function() {
@@ -213,8 +214,10 @@
       });
 
       const transactionData = await response.json();
-      if (transactionData.success) {
+      if(transactionData.success) {
         window.location.href = redirect_url + '?order_number=' + transactionData.order_number + '&payment_id=' + transactionData.payment_id;
+      } else {
+        window.location.href = cancel_url + '?error=payment_processing';
       }
     }
   }).render('#paypal-button-container');

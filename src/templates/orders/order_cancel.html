@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<div class="container" style="margin-top: 50px;">
+  <h2 class="text-center">Payment Failed. Something went wrong.</h2>
+  <p class="text-center">If you were charged, you will get a refund in 2-3 business days</p>
+  <br>
+  <div class="text-center" style="margin-bottom: 50px;">
+    <a href="{% url 'store' %}" class="btn btn-success">Back to home</a>
+  </div>
+</div>
+
+{% endblock %}

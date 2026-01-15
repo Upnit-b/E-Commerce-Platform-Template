@@ -10,6 +10,7 @@ from django.conf import settings
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
 
 from carts.models import CartItem, Product
 from .forms import OrderForm
@@ -295,8 +296,6 @@ def order_complete(request):
             order.status = "Completed"
 
         ordered_products = OrderProduct.objects.filter(order=order)
-        for item in ordered_products:
-            print(item.variations)
 
         sub_total = 0
         for i in ordered_products:
@@ -312,4 +311,11 @@ def order_complete(request):
         }
         return render(request, "orders/order_complete.html", context)
     except (Payment.DoesNotExist, Order.DoesNotExist):
-        return redirect("home")
+        return redirect("cart")
+
+
+def order_cancel(request):
+    if request.user.is_authenticated:
+        return render(request, "orders/order_cancel.html")
+    else:
+        return redirect("cart")
