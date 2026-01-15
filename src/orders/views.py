@@ -105,6 +105,8 @@ def create_order(request):
             "paypal_order_id": response_data["id"],
             "status": response_data["status"]
         })
+    else:
+        return redirect("home")
 
 
 def payments(request):
