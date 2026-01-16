@@ -184,7 +184,6 @@ def login_view(request):
                     # parsed_url = ParseResult(scheme='http', netloc='127.0.0.1:8000', path='/accounts/login/', params='', query='next=/cart/checkout/', fragment='')
 
                     query_params = parse.parse_qs(parsed_url.query)
-                    print(query_params)
                     # query_params = {'next': ['/cart/checkout/']}
                     if "next" in query_params:
                         next_page = query_params["next"][0]

@@ -100,7 +100,6 @@ def create_order(request):
             f"{settings.PAYPAL_API_BASE}/v2/checkout/orders", headers=headers, json=payload)
 
         response_data = response.json()
-        # print(response_data)
 
         return JsonResponse({
             "paypal_order_id": response_data["id"],
@@ -291,15 +290,19 @@ def order_complete(request):
     payment_id = request.GET.get("payment_id")
 
     try:
+        # get the order which was completed
         order = Order.objects.get(order_number=order_number, is_ordered=True)
         if order.is_ordered == True:
             order.status = "Completed"
 
-        ordered_products = OrderProduct.objects.filter(order=order)
+        # since we have to show the ordered products, we get ordered_products from order products model
+        if order is not None:
+            ordered_products = OrderProduct.objects.filter(order=order)
 
         sub_total = 0
         for i in ordered_products:
             sub_total += i.product_price * i.quantity
+
         payment = Payment.objects.get(payment_id=payment_id)
 
         context = {
