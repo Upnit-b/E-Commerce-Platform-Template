@@ -355,7 +355,7 @@ def resetPassword(request):
     return render(request, "accounts/resetPassword.html")
 
 
-@login_required(login_url="/login")
+@login_required(login_url="login")
 def my_orders(request):
     orders = Order.objects.filter(
         user=request.user, is_ordered=True).order_by('-created_at')
@@ -379,6 +379,7 @@ def edit_profile(request):
             profile_form.save()
             messages.success(request, "Your profile has been updated")
             return redirect("edit_profile")
+    # if request is GET, then we render the form
     else:
         user_form = UserForm(instance=request.user)
         profile_form = UserProfileForm(instance=userprofile)
@@ -411,7 +412,7 @@ def change_password(request):
                     request, "Password updated successfully. Please login with new password.")
                 return redirect("login")
             else:
-                messages.error(request, "Please enter valid current password")
+                messages.error(request, "Invalid current password")
                 return redirect("change_password")
         else:
             messages.error(request, "Password do not match.")
@@ -421,13 +422,15 @@ def change_password(request):
 
 @login_required(login_url="login")
 def order_detail(request, order_id):
+    # get the order details like payment, etc
     order_detail = OrderProduct.objects.filter(order__order_number=order_id)
-    print(order_id)
+
+    # get the complete order
     order = Order.objects.get(order_number=order_id)
     sub_total = 0
 
-    for i in order_detail:
-        sub_total += i.product_price * i.quantity
+    for item in order_detail:
+        sub_total += item.product_price * item.quantity
 
     return render(request, "accounts/order_detail.html", {
         "order_detail": order_detail,
