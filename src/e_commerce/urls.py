@@ -23,6 +23,7 @@ from django.conf import settings
 from . import views
 
 urlpatterns = [
+    # changed default admin route to securelogin for security
     path("securelogin/", admin.site.urls),
     path("", views.home, name="home"),
     path("store/", include("store.urls")),
