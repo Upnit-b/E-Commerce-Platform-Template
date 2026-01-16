@@ -56,11 +56,16 @@ def product_detail(request, category_slug, product_slug):
     except Exception as e:
         raise e
 
-    try:
-        orderproduct = OrderProduct.objects.filter(
-            user=request.user.id, product=single_product).exists()
+    # this "if logic" is to remove a bug. We were getting anonymousUser when the user was not logged
+    # in and was trying to access the single product page
+    if (request.user.is_authenticated):
+        try:
+            orderproduct = OrderProduct.objects.filter(
+                user=request.user, product=single_product).exists()
 
-    except OrderProduct.DoesNotExist:
+        except OrderProduct.DoesNotExist:
+            orderproduct = None
+    else:
         orderproduct = None
 
     # Get the reviews
@@ -106,6 +111,8 @@ def submit_review(request, product_id):
         try:
             # Check if the user already reviewed the product
             review = ReviewRating.objects.get(product=product, user=user)
+            # we also pass the instance review to check if there is already a review for the product
+            # and the user. If there is, we update that review
             form = ReviewForm(request.POST, instance=review)
             if form.is_valid():
                 form.save()
@@ -118,7 +125,10 @@ def submit_review(request, product_id):
         except ReviewRating.DoesNotExist:
             form = ReviewForm(request.POST)
             if form.is_valid():
+                # get the instance of the ReviewRating model
                 new_review = ReviewRating()
+
+                # add the form data to the ReviewRating model for saving to db
                 new_review.subject = form.cleaned_data['subject']
                 new_review.rating = form.cleaned_data['rating']
                 new_review.review = form.cleaned_data['review']

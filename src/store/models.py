@@ -30,6 +30,7 @@ class Product(models.Model):
     def __str__(self):
         return self.product_name
 
+    # get the average rating for each product to display in product_detail.html
     def averageReview(self):
         reviews = ReviewRating.objects.filter(
             product=self, status=True).aggregate(average=Avg('rating'))
@@ -38,6 +39,7 @@ class Product(models.Model):
             avg = float(reviews['average'])
         return avg
 
+    # get the number of reviews for each product to display in product_detail.html
     def countReview(self):
         reviews = ReviewRating.objects.filter(
             product=self, status=True).aggregate(count=Count('id'))
