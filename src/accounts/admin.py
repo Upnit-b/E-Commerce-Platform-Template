@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.utils.html import format_html
+from django.templatetags.static import static
 
 from .models import Account, UserProfile
 
@@ -21,8 +22,14 @@ class AccountAdmin(UserAdmin):
 
 
 class UserProfileAdmin(admin.ModelAdmin):
+    # getting the profile image for displaying in admin panel
+    # if there is no profile image, a dummy image will be displayed
     def thumbnail(self, object):
-        return format_html('<img src="{}" width="30" style="border-radius:50%;">'.format(object.profile_picture.url))
+        if object.profile_picture:
+            image_url = object.profile_picture.url
+        else:
+            image_url = static("images/dummy-avatar.jpg")
+        return format_html('<img src="{}" width="30" style="border-radius:50%;">'.format(image_url))
 
     thumbnail.short_description = 'Profile Picture'
     list_display = ("user", "city", "state", "country", "thumbnail")
