@@ -423,6 +423,7 @@ def change_password(request):
 @login_required(login_url="login")
 def order_detail(request, order_id):
     order_detail = OrderProduct.objects.filter(order__order_number=order_id)
+    print(order_id)
     order = Order.objects.get(order_number=order_id)
     sub_total = 0
 

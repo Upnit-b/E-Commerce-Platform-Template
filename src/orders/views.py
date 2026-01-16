@@ -263,7 +263,7 @@ def place_order(request):
             # Generate order number
             today = datetime.date.today()
             suffix = uuid.uuid4().hex[:8].upper()
-            order_number = f"Ord-{today}-{suffix}"
+            order_number = f"Ord{today}-{suffix}"
             data.order_number = order_number
             data.save()
 
