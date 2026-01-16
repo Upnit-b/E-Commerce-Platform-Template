@@ -102,7 +102,7 @@ def submit_review(request, product_id):
     product = Product.objects.get(pk=product_id)
     user = request.user
 
-    if request.method == 'POST':
+    if request.method == 'POST' and user.is_authenticated:
         try:
             # Check if the user already reviewed the product
             review = ReviewRating.objects.get(product=product, user=user)
@@ -129,3 +129,5 @@ def submit_review(request, product_id):
                 messages.success(
                     request, 'Thank you! Your review has been submitted.')
                 return redirect(url)
+    else:
+        return redirect("store")

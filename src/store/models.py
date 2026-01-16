@@ -78,8 +78,8 @@ class Variation(models.Model):
     class Meta:
         constraints = [
             models.UniqueConstraint(
-                fields = ["product", "variation_category", "variation_value"],
-                name = "unique_product_variation"
+                fields=["product", "variation_category", "variation_value"],
+                name="unique_product_variation"
             )
         ]
 
