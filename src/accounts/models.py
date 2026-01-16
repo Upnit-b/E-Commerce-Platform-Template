@@ -89,6 +89,7 @@ class Account(AbstractBaseUser):
 
 
 class UserProfile(models.Model):
+    # not using foreign key because one account should have one profile only
     user = models.OneToOneField(Account, on_delete=models.CASCADE)
     address_line_1 = models.CharField(blank=True, null=True, max_length=100)
     address_line_2 = models.CharField(blank=True, null=True, max_length=100)

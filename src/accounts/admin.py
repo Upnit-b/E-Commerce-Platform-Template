@@ -35,6 +35,7 @@ class UserProfileAdmin(admin.ModelAdmin):
         return format_html('<img src="{}" width="30" style="border-radius:50%;">', image_url)
 
     thumbnail.short_description = 'Profile Picture'
+    
     list_display = ("user", "city", "state", "country", "thumbnail")
 
 
