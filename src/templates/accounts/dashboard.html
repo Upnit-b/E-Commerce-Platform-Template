@@ -7,7 +7,6 @@
 <section class="section-conten padding-y bg">
 
   {% include "includes/alerts.html" %}
-
   <div class="container">
     <div class="row">
       {% include "includes/dashboard_sidebar.html" %}
@@ -34,8 +33,14 @@
               <div class="col md-6">
                 <div class="card">
                   <div class="card-body">
-                    <img class="mb-2" src="{{ userprofile.profile_picture.url }}" alt="User Profile Picture" width=60" height="60"
-                      style="border-radius:50%">
+                    {% if userprofile.profile_picture %}
+                    <img class="mb-2" src="{{ userprofile.profile_picture.url }}" alt="User Profile Picture" width="60"
+                      height="60" style="border-radius:50%">
+                    {% else %}
+                    <img class="mb-2" src="{% static 'images/avatars/dummy-avatar.jpg' %}" alt="User Profile Picture"
+                      width="60" height="60" style="border-radius:50%">
+                    {% endif %}
+
 
                     <p class="mb-1">{{ user.email }}</p>
                     <p>{{ user.phone_number }}</p>

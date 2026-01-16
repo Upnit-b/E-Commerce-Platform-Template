@@ -23,13 +23,16 @@ class AccountAdmin(UserAdmin):
 
 class UserProfileAdmin(admin.ModelAdmin):
     # getting the profile image for displaying in admin panel
-    # if there is no profile image, a dummy image will be displayed
     def thumbnail(self, object):
+        # since we are using signals to auto create userprofile when account is created,
+        # there might be no profile picture. Without profile picture, the dashboard and admin userprofile
+        # view will break, hence we give a default profile picture
         if object.profile_picture:
             image_url = object.profile_picture.url
         else:
-            image_url = static("images/dummy-avatar.jpg")
-        return format_html('<img src="{}" width="30" style="border-radius:50%;">'.format(image_url))
+            image_url = static("images/avatars/dummy-avatar.jpg")
+
+        return format_html('<img src="{}" width="30" style="border-radius:50%;">', image_url)
 
     thumbnail.short_description = 'Profile Picture'
     list_display = ("user", "city", "state", "country", "thumbnail")
