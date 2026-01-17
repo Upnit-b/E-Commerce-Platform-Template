@@ -10,6 +10,9 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+WHITENOISE_MANIFEST_STRICT = False
+
+
 SECRET_KEY = os.getenv('SECRET_KEY', 'dev-only-change-me')
 
 # SECURITY WARNING: don't run with debug turned on in production!
