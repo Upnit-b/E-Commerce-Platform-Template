@@ -240,6 +240,12 @@ def place_order(request):
 
     if request.method == "POST":
         form = OrderForm(request.POST)
+
+        # Generate order number
+        today = datetime.date.today()
+        suffix = uuid.uuid4().hex[:8].upper()
+        order_number = f"Ord{today}-{suffix}"
+
         if form.is_valid():
             # Store all the billing info inside the database
             # get the instance of the order model to save data in this instance
@@ -258,12 +264,6 @@ def place_order(request):
             data.order_total = grand_total
             data.tax = tax
             data.ip = request.META.get("REMOTE_ADDR")
-            data.save()
-
-            # Generate order number
-            today = datetime.date.today()
-            suffix = uuid.uuid4().hex[:8].upper()
-            order_number = f"Ord{today}-{suffix}"
             data.order_number = order_number
             data.save()
 

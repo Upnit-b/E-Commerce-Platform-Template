@@ -31,7 +31,7 @@ class Order(models.Model):
         Account, on_delete=models.CASCADE, null=True, blank=True, related_name="orders")
     payment = models.ForeignKey(
         Payment, on_delete=models.SET_NULL, blank=True, null=True, related_name="orders")
-    order_number = models.CharField(max_length=20, unique=True)
+    order_number = models.CharField(max_length=100, unique=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     phone_number = models.CharField(max_length=15)
