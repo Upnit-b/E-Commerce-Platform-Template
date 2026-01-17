@@ -16,10 +16,12 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'dev-only-change-me')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.koyeb.app'
+    'https://*.koyeb.app',
+    'https://willing-tommie-upnit-42566811.koyeb.app'
 ]
 
-ALLOWED_HOSTS = ['.koyeb.app', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = [
+    'https://willing-tommie-upnit-42566811.koyeb.app', '.koyeb.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
