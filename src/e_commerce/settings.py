@@ -15,11 +15,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'dev-only-change-me')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
-# CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(
-#     ",") if os.getenv("CSRF_TRUSTED_ORIGINS") else []
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com'
+]
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "127.0.0.1").split(",")
-
+ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -88,7 +88,8 @@ AUTH_USER_MODEL = "accounts.Account"
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if DATABASE_URL:
-  DATABASES = {"default": dj_database_url.parse(DATABASE_URL, conn_max_age=600, ssl_require=True)}
+    DATABASES = {"default": dj_database_url.parse(
+        DATABASE_URL, conn_max_age=600, ssl_require=True)}
 else:
     DATABASES = {
         "default": {
