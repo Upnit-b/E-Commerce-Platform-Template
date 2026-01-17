@@ -16,10 +16,10 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'dev-only-change-me')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.onrender.com'
+    'https://*.koyeb.app'
 ]
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['.koyeb.app', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -171,9 +171,9 @@ MESSAGE_TAGS = {
 
 
 # Configuring email host (SMTP Configuration)
-EMAIL_HOST = os.getenv('EMAIL_HOST')  # "smtp.gmail.com"
-EMAIL_PORT = int(os.getenv('EMAIL_PORT'))  # 587
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')  # "upnit.singh@gmail.com"  #
+EMAIL_HOST = os.getenv('EMAIL_HOST')
+EMAIL_PORT = os.getenv('EMAIL_PORT')
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
 
