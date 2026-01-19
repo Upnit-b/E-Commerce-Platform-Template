@@ -1,7 +1,18 @@
-# Exclude Django templates and static files from language stats
+# Django templates
 *.html linguist-detectable=false
+
+# Static assets
+*.css linguist-detectable=false
+*.js linguist-detectable=false
+*.map linguist-detectable=false
+
 static/* linguist-detectable=false
 static_collected/* linguist-detectable=false
 media/* linguist-detectable=false
-# Exclude migrations (auto-generated)
+
+# Auto-generated Django files
 */migrations/* linguist-detectable=false
+
+# Optional: compiled / cache
+*.min.css linguist-detectable=false
+*.min.js linguist-detectable=false
