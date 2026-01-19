@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-set -o errexit
+set -e
 
-pip install -r requirements.txt
+python manage.py migrate --noinput
+python manage.py collectstatic --noinput
 
-python src/manage.py collectstatic --noinput
-python src/manage.py migrate
+exec gunicorn e_commerce.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 3

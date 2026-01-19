@@ -1,0 +1,84 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+dist/
+build/
+venv/
+env/
+ENV/
+.venv
+
+# Django
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+static_collected/
+media/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.code-workspace
+
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Docker
+.docker/
+
+# Documentation
+README.md
+*.md
+
+# Environment files (should be provided at runtime)
+.env
+.env.local
+.env.*.local
+
+# Test files
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Node modules (if any)
+node_modules/
+npm-debug.log
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# Celery
+celerybeat-schedule
+celerybeat.pid
+
+# Photos directory (media files should be handled separately)
+src/photos/
+src/media/

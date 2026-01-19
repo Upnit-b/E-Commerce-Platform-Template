@@ -32,13 +32,13 @@
             <div class="filter-content collapse show" id="collapse_1">
               <div class="card-body">
 
-                <ul class="list-menu d-grid gap-3">
+                <ul class="list-menu d-grid gap-4 text-center">
                   <li>
-                    <a href="{% url 'store' %}" class="btn btn-primary w-100 text-white">All Products</a>
+                    <a href="{% url 'store' %}" class="btn btn-primary w-50 text-white">All Products</a>
                   </li>
                   {% for category in links %}
                   <li>
-                    <a href="{{ category.get_url }}" class="btn btn-primary w-100 text-white">{{ category.category_name }}</a>
+                    <a href="{{ category.get_url }}" class="btn btn-primary w-50 text-white">{{ category.category_name }}</a>
                   </li>
                   {% endfor %}
                 </ul>
