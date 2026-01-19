@@ -24,10 +24,9 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 # ]
 
 # ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,127.0.0.1").split(",")
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = [".koyeb.app", "127.0.0.1", "localhost"]
 
-# CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(
-#     ",") if os.getenv("CSRF_TRUSTED_ORIGINS") else []
+CSRF_TRUSTED_ORIGINS = ["https://*.koyeb.app"]
 
 
 # Application definition
