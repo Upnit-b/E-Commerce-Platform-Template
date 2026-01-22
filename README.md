@@ -1,4 +1,4 @@
-# 🛍️ Django eCommerce
+# 🛍️ E-Commerce Platform
 
 A production-ready e-commerce platform built with Django, supporting full product management, shopping cart, secure checkout using the **PayPal REST API**, user accounts, email verification, and a powerful admin dashboard.
 
